@@ -1,4 +1,3 @@
---- 
 displayName: "npm install and build"
 inputs: 
   testResultsFiles: "**/TEST-*.xml"
