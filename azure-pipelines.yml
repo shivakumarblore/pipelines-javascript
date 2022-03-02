@@ -1,24 +1,22 @@
-displayName: "npm install and build"
-inputs: 
-  testResultsFiles: "**/TEST-*.xml"
-  testResultsFormat: JUnit
-pool: 
-  vmImage: ubuntu-latest
-steps: 
-  - 
-    displayName: "Install Node.js"
-    inputs: 
-      versionSpec: 10.x
-    task: NodeTool@0
-  - 
-    script: |
-        npm install
-        npm run build
-        npm test
-task: PublishTestResults@2
-trigger: 
-  - master
--task: PublishTestResults@2
-inputs:
+trigger:
+  -master
+
+pool:
+  vmImage: 'ubuntu-latest'
+  
+steps:
+- task: NodeTool@0
+  inputs:
+    versionSpec: '10.x'
+  displayName: 'Install Node. js'
+
+- script:
+    npm install
+    npm run build
+    npm test
+  displayName: 'npm install and build'
+  
+- task: PublishTestResults@2
+  inputs:
     testResultsFormat: 'JUnit'
     testResultsFiles: '**/TEST-*.xml'
